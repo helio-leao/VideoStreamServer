@@ -5,7 +5,7 @@ import path from "path";
 
 const app = express();
 
-const videoPath = path.join(path.resolve(), "files", "video.mp4");
+const videoPath = path.join(path.resolve(), "video.mp4");
 
 app.get("/", async (req, res) => {
   const { size } = await stat(videoPath);
@@ -19,7 +19,7 @@ app.get("/", async (req, res) => {
     res.writeHead(206, {
       "content-range": `bytes ${start}-${end}/${size}`,
       "accept-ranges": "bytes",
-      "content-length": start - end + 1,
+      "content-length": end - start + 1,
       "content-type": "video/mp4",
     });
     createReadStream(videoPath, { start, end }).pipe(res);
