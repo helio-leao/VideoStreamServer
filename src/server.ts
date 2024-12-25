@@ -3,6 +3,8 @@ import { createReadStream } from "fs";
 import { stat } from "fs/promises";
 import path from "path";
 
+const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 const videoPath = path.join(path.resolve(), "video.mp4");
@@ -32,4 +34,4 @@ app.get("/", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("Server running..."));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}...`));
